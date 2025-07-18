@@ -45,5 +45,15 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Permisos de Ubicación Añadidos -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Esta aplicación necesita acceso a tu ubicación para mostrar estaciones cercanas y tu posición en el mapa.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Esta aplicación necesita acceso a tu ubicación para mostrar estaciones cercanas y tu posición en el mapa.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Esta aplicación necesita acceso a tu ubicación para mostrar estaciones cercanas y tu posición en el mapa.</string>
+	<!-- Fin de Permisos de Ubicación Añadidos -->
+
 </dict>
 </plist>
