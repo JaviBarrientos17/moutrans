@@ -1,4 +1,3 @@
-// lib/widgets/station_card.dart
 import 'package:flutter/material.dart';
 import '../models/station.dart';
 
@@ -12,73 +11,46 @@ class StationCard extends StatelessWidget {
     this.onTap,
   });
 
-  Widget _getIcon(String type, BuildContext context) {
-    String iconPath;
-    Color iconColor = Theme.of(context).colorScheme.primary;
-    switch (type.toLowerCase()) {
-      case 'metro':
-        iconPath = 'assets/icons/metro.png';
-        break;
-      case 'bus':
-        iconPath = 'assets/icons/bus.png';
-        break;
-      default:
-        return Icon(Icons.location_on, color: iconColor, size: 24);
+  Widget _getCardIcon(String typeString) {
+    IconData iconData;
+    Color color;
+    switch (typeString.toLowerCase()) {
+      case 'metro': iconData = Icons.directions_subway; color = Colors.red; break;
+      case 'bus': iconData = Icons.directions_bus; color = Colors.green; break;
+      case 'train': iconData = Icons.train; color = Colors.blue; break;
+      case 'tram': iconData = Icons.tram; color = Colors.orange; break;
+      default: iconData = Icons.location_pin; color = Colors.grey;
     }
-
-    return Image.asset(
-      iconPath,
-      width: 24,
-      height: 24,
-      color: iconColor,
-      errorBuilder: (context, error, stackTrace) {
-        return Icon(Icons.location_on, color: iconColor, size: 24); // Fallback
-      },
-    );
+    return Icon(iconData, color: color, size: 24);
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 160,
+    return InkWell(
+      onTap: onTap,
       child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(10),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    _getIcon(station.type, context),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        station.name,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  station.type.toUpperCase(),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
-                ),
-              ],
-            ),
+        margin: const EdgeInsets.only(right: 10.0),
+        child: Container(
+          width: 150, // Ancho de la tarjeta
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _getCardIcon(station.type),
+              const SizedBox(height: 8),
+              Text(
+                station.name,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                station.type.toUpperCase(),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+              ),
+            ],
           ),
         ),
       ),
