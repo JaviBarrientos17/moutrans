@@ -139,7 +139,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Estaciones Cercanas'),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/moutrans_logo.png',
+            fit: BoxFit.contain,
+            width: 32,
+            height: 32,
+          ),
+        ),
+        title: const Text('Moutrans'),
       ),
       body: _buildBody(),
     );
@@ -215,15 +224,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Text(
-            _permissionStatus != null
-                ? 'Permiso General: ${_permissionStatus.toString().split('.').last}'
-                : 'Verificando permiso...',
-            style: Theme.of(context).textTheme.titleSmall,
-            textAlign: TextAlign.center,
-          ),
+        const Padding(
+          padding: EdgeInsets.all(12.0),
         ),
         Expanded(
           flex: 2,
